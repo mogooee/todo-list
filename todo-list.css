@@ -84,3 +84,8 @@ body {
   color: red;
   cursor: pointer;
 }
+
+.strike {
+  text-decoration: line-through;
+  text-decoration-color: rgba(0, 0, 0, 0.3);
+}

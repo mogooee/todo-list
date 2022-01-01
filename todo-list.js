@@ -32,7 +32,7 @@ class ToDo {
   Rendering(id, newTask, done) {
     if (!newTask) return;
 
-    const task = `<li>
+    const task = `<li class="${done ? "strike" : ""}">
      <div class="todo__column"><i id="${id}" class="done far ${
       done ? complete : unComplete
     }"></i></div>
@@ -53,6 +53,7 @@ class ToDo {
     const doneElement = document.getElementById(`${id}`);
     doneElement.classList.toggle(complete);
     doneElement.classList.toggle(unComplete);
+    doneElement.parentNode.parentNode.classList.toggle("strike");
     this.storage[id].done = this.storage[id].done ? 0 : 1;
     this.SaveLocalStorage();
   }
