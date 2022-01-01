@@ -36,8 +36,9 @@ class ToDo {
      <div class="todo__column"><i id="${id}" class="done far ${
       done ? complete : unComplete
     }"></i></div>
-     <div class="todo__column">${newTask}</div>
-     <div class="todo__column"><i id="${id}" class="remove fas fa-trash"></i></div>
+     <div class="todo__column todo__text">${newTask}</div>
+     <div class="todo__column "><i id="${id}" class="remove fas fa-trash"></i></div>
+     <div class="todo__column"><i id="${id}" class="edit fas fa-pen-square"></i></div>
      </li> 
      `;
     const position = "beforeend";
@@ -65,6 +66,14 @@ class ToDo {
     this.SaveLocalStorage();
   }
 
+  EditList(id) {
+    const li = document.getElementById(`${id}`).parentNode.parentNode;
+    const editedLIST = prompt("Edit your task", li.innerText);
+    li.querySelector(".todo__text").innerText = editedLIST;
+    this.storage[id].newTask = editedLIST;
+    this.SaveLocalStorage();
+  }
+
   SaveLocalStorage() {
     localStorage.setItem("TODO", JSON.stringify(this.storage));
   }
@@ -89,6 +98,11 @@ class ToDo {
 
       if (e.target.classList.contains("remove")) {
         this.DeleteList(e.target.id);
+        return;
+      }
+
+      if (e.target.classList.contains("edit")) {
+        this.EditList(e.target.id);
         return;
       }
     });
